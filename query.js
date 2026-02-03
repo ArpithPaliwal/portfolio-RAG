@@ -112,7 +112,17 @@ import { QdrantClient } from "@qdrant/js-client-rest";
 import { ChatGroq } from "@langchain/groq";
 
 const app = express();
-app.use(cors()); // Allows your website to call this API
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:3000",
+      "https://arpithpaliwal-portfolio.vercel.app/"
+    ],
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 app.use(express.json()); // Parses JSON bodies
 
 // --- SHARED CLIENTS ---
