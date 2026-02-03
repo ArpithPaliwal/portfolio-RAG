@@ -117,12 +117,14 @@ app.use(
     origin: [
       "http://localhost:5173",
       "http://localhost:3000",
-      "https://arpithpaliwal-portfolio.vercel.app/"
+      "https://arpithpaliwal-portfolio.vercel.app"
     ],
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+app.options("*", cors());
+
 app.use(express.json()); // Parses JSON bodies
 
 // --- SHARED CLIENTS ---
@@ -143,6 +145,10 @@ const model = new ChatGroq({
 });
 
 // --- THE API ENDPOINT ---
+app.get("/wakeup", (req, res) => {
+  // Intentionally minimal to keep the service warm
+  res.status(204).end(); // No Content
+});
 app.post("/ask", async (req, res) => {
   try {
     const { question } = req.body;
