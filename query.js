@@ -130,7 +130,7 @@ app.use(express.json()); // Parses JSON bodies
 // --- SHARED CLIENTS ---
 const embeddings = new GoogleGenerativeAIEmbeddings({
   apiKey: process.env.GOOGLE_API_KEY,
-  model: "text-embedding-004",
+  model: "gemini-embedding-001",
 });
 
 const qdrantClient = new QdrantClient({
